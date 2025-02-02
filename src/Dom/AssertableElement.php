@@ -12,10 +12,12 @@ use Ziadoz\AssertableHtml\Concerns\IdentifiesElement;
 use Ziadoz\AssertableHtml\Concerns\Scopeable;
 use Ziadoz\AssertableHtml\Concerns\Whenable;
 use Ziadoz\AssertableHtml\Concerns\Withable;
+use Ziadoz\AssertableHtml\Traits\Debuggable;
 
 readonly class AssertableElement
 {
     use AssertsElement;
+    use Debuggable;
     use IdentifiesElement;
     use Scopeable;
     use Whenable;
@@ -61,18 +63,6 @@ readonly class AssertableElement
     public function getHtml(): string
     {
         return $this->element->ownerDocument->saveHtml($this->element);
-    }
-
-    /** Dump the assertable element. */
-    public function dump(): void
-    {
-        dump($this->getHtml());
-    }
-
-    /** Dump and die the assertable element. */
-    public function dd(): never
-    {
-        dd($this->getHtml());
     }
 
     /*

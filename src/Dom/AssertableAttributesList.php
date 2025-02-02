@@ -14,10 +14,11 @@ use RuntimeException;
 use Traversable;
 use Ziadoz\AssertableHtml\Concerns\AssertsAttributesList;
 use Ziadoz\AssertableHtml\Support\Whitespace;
+use Ziadoz\AssertableHtml\Traits\Debuggable;
 
 final readonly class AssertableAttributesList implements ArrayAccess, Countable, IteratorAggregate
 {
-    use AssertsAttributesList;
+    use AssertsAttributesList, Debuggable;
 
     /** The element attributes */
     private array $attributes;
@@ -38,18 +39,6 @@ final readonly class AssertableAttributesList implements ArrayAccess, Countable,
         }
 
         return $attributes;
-    }
-
-    /** Dump the assertable class list. */
-    public function dump(): void
-    {
-        dump($this->toArray());
-    }
-
-    /** Dump and die the assertable class list. */
-    public function dd(): never
-    {
-        dd($this->toArray());
     }
 
     /** Return the attribute (optionally whitespace normalised). */

@@ -18,10 +18,12 @@ use Traversable;
 use Ziadoz\AssertableHtml\Concerns\AssertsElementsList;
 use Ziadoz\AssertableHtml\Concerns\Scopeable;
 use Ziadoz\AssertableHtml\Concerns\Whenable;
+use Ziadoz\AssertableHtml\Traits\Debuggable;
 
 final readonly class AssertableElementsList implements ArrayAccess, Countable, IteratorAggregate
 {
     use AssertsElementsList;
+    use Debuggable;
     use Scopeable;
     use Whenable;
 
@@ -60,18 +62,6 @@ final readonly class AssertableElementsList implements ArrayAccess, Countable, I
             fn (AssertableElement $element): string => $element->getHtml(),
             $this->elements,
         ));
-    }
-
-    /** Dump the assertable element list. */
-    public function dump(): void
-    {
-        dump($this->getHtml());
-    }
-
-    /** Dump and die the assertable element list. */
-    public function dd(): never
-    {
-        dd($this->getHtml());
     }
 
     /** Return whether the assertable element list is empty. */

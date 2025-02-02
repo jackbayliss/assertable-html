@@ -13,10 +13,12 @@ use Ziadoz\AssertableHtml\Concerns\Scopeable;
 use Ziadoz\AssertableHtml\Concerns\Whenable;
 use Ziadoz\AssertableHtml\Concerns\Withable;
 use Ziadoz\AssertableHtml\Exceptions\UnableToCreateAssertableDocument;
+use Ziadoz\AssertableHtml\Traits\Debuggable;
 
 final readonly class AssertableDocument
 {
     use AssertsDocument;
+    use Debuggable;
     use Scopeable;
     use Whenable;
     use Withable;
@@ -34,18 +36,6 @@ final readonly class AssertableDocument
     public function getHtml(): string
     {
         return $this->document->saveHtml();
-    }
-
-    /** Dump the document HTML. */
-    public function dump(): void
-    {
-        dump($this->getHtml());
-    }
-
-    /** Dump and die the document HTML. */
-    public function dd(): never
-    {
-        dd($this->getHtml());
     }
 
     /*

@@ -14,10 +14,11 @@ use RuntimeException;
 use Stringable;
 use Traversable;
 use Ziadoz\AssertableHtml\Concerns\AssertsClassesList;
+use Ziadoz\AssertableHtml\Traits\Debuggable;
 
 final readonly class AssertableClassesList implements ArrayAccess, Countable, IteratorAggregate, Stringable
 {
-    use AssertsClassesList;
+    use AssertsClassesList, Debuggable;
 
     /** Create a list of assertable classes. */
     public function __construct(private TokenList $classes)
@@ -89,18 +90,6 @@ final readonly class AssertableClassesList implements ArrayAccess, Countable, It
     public function all(array $classes): bool
     {
         return array_all(array_values($classes), fn (string $class): bool => $this->classes->contains($class));
-    }
-
-    /** Dump the assertable class list. */
-    public function dump(): void
-    {
-        dump($this->toArray());
-    }
-
-    /** Dump and die the assertable class list. */
-    public function dd(): never
-    {
-        dd($this->toArray());
     }
 
     /** Return the assertable class list as an array. */
